@@ -14,13 +14,15 @@ class PredictPipeline:
         try:
             preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
             model_path=os.path.join('artifacts','model.pkl')
+            
+            print("Before Loading")
+            preprocessor=load_object(file_path=preprocessor_path)
+            model=load_object(file_path=model_path)
 
-            preprocessor=load_object(preprocessor_path)
-            model=load_object(model_path)
-
+            print("After Loading")
             data_scaled=preprocessor.transform(features)
-
             pred=model.predict(data_scaled)
+
             return pred
             
 
@@ -50,7 +52,7 @@ class CustomData:
         self.color = color
         self.clarity = clarity
 
-    def get_data_as_dataframe(self):
+    def get_data_as_data_frame(self):
         try:
             custom_data_input_dict = {
                 'carat':[self.carat],
